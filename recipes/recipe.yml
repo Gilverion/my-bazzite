@@ -31,6 +31,6 @@ modules:
       
   - type: script
     scripts:
-      - install-official-discord.sh
+      - ../files/scripts/install-official-discord.sh
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully

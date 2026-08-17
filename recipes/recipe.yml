@@ -16,7 +16,7 @@ modules:
     repos:
       copr:
         - atim/starship
-        - codifex/coolercontrol
+        - codifryed/CoolerControl
     install:
       packages:
         - micro

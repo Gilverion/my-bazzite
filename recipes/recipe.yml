@@ -29,5 +29,6 @@ modules:
   - type: script
     scripts:
       - install-official-discord.sh
+      - remove-waydroid-remnants.sh
       
   - type: signing

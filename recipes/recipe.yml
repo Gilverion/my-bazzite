@@ -16,10 +16,19 @@ modules:
     repos:
       copr:
         - atim/starship
+        - codifex/coolercontrol
     install:
       packages:
         - micro
         - starship
+        - coolercontrol
+        - ckb-next
+        
+  - type: systemd
+    system:
+      enabled:
+        - coolercontrold.service
+        - ckb-next-daemon.service     
         
   - type: rpm-ostree
     remove:

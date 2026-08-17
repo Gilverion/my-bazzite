@@ -32,3 +32,4 @@ modules:
   - type: script
     scripts:
       - ../files/scripts/install-official-discord.sh
+- type: signing

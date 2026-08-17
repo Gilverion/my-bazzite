@@ -12,10 +12,6 @@ image-version: latest # You can pin to a specific version of Fedora as well
 # module configuration, executed in order
 # you can include multiple instances of the same module
 modules:
-  - type: files
-    files:
-      - usr: /usr
-
   - type: dnf
     repos:
       copr:
@@ -32,4 +28,5 @@ modules:
   - type: script
     scripts:
       - ../files/scripts/install-official-discord.sh
+      
   - type: signing

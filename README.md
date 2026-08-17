@@ -1,43 +1,51 @@
-# BlueBuild Template &nbsp; [![bluebuild build badge](https://github.com/blue-build/template/actions/workflows/build.yml/badge.svg)](https://github.com/blue-build/template/actions/workflows/build.yml)
+# My Custom Bazzite Image
 
-See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
+A tailored, immutable Linux system based on [Bazzite](https://bazzite.gg/) and managed with [BlueBuild](https://blue-build.org/). 
 
-After setup, it is recommended you update this README to describe your custom image.
+This image extends the official Bazzite base image with personal system services, drivers, and optimizations—without requiring local `rpm-ostree` layered packages on the target machine.
 
-## Installation
+## 🚀 Key Features & Customizations
 
-> [!WARNING]  
-> [This is an experimental feature](https://www.fedoraproject.org/wiki/Changes/OstreeNativeContainerStable), try at your own discretion.
+* **Applications & Drivers:**
+  * **Discord:** Official installation embedded directly into the system image.
+  * **CoolerControl:** Comprehensive fan control suite including the background service (`coolercontrold.service`).
+  * **ckb-next:** Driver software for Corsair peripherals along with its daemon (`ckb-next-daemon.service`).
+* **System Cleanups:**
+  * Removal of Waydroid leftovers and unused desktop shortcuts.
+* **Security:**
+  * Automated digital container signing via **Cosign**.
 
-To rebase an existing atomic Fedora installation to the latest build:
+---
 
-- First rebase to the unsigned image, to get the proper signing keys and policies installed:
-  ```
-  rpm-ostree rebase ostree-unverified-registry:ghcr.io/blue-build/template:latest
-  ```
-- Reboot to complete the rebase:
-  ```
-  systemctl reboot
-  ```
-- Then rebase to the signed image, like so:
-  ```
-  rpm-ostree rebase ostree-image-signed:docker://ghcr.io/blue-build/template:latest
-  ```
-- Reboot again to complete the installation
-  ```
-  systemctl reboot
-  ```
+## 📦 Installation & Setup (Rebase)
 
-The `latest` tag will automatically point to the latest build. That build will still always use the Fedora version specified in `recipe.yml`, so you won't get accidentally updated to the next major version.
+To switch your system to this custom image, execute the following steps in your terminal:
 
-## ISO
+### 1. Store the public Cosign key locally
+Enable your system to cryptographically verify your GitHub image signature:
 
-If build on Fedora Atomic, you can generate an offline ISO with the instructions available [here](https://blue-build.org/how-to/generate-iso/#_top). These ISOs cannot unfortunately be distributed on GitHub for free due to large sizes, so for public projects something else has to be used for hosting.
+sudo mkdir -p /etc/pki/containers
+sudo cp cosign.pub /etc/pki/containers/my-bazzite.pub
 
-## Verification
+### 2. Rebase your system
+Rebase to the signed registry entry:
 
-These images are signed with [Sigstore](https://www.sigstore.dev/)'s [cosign](https://github.com/sigstore/cosign). You can verify the signature by downloading the `cosign.pub` file from this repo and running the following command:
+rpm-ostree rebase ostree-image-signed:docker://ghcr.io/gilverion/my-bazzite:latest
 
-```bash
-cosign verify --key cosign.pub ghcr.io/blue-build/template
-```
+Reboot your system once the rebase completes:
+
+systemctl reboot
+
+---
+
+## 🔄 Updates
+
+Once rebased, your system is linked directly to your GitHub Container Registry. You will receive daily updates—including upstream Bazzite and Linux kernel updates—via standard system updates:
+
+---
+
+## 🛠️ Repository Structure
+
+* `.github/workflows/`: GitHub Actions workflows for building and signing the image automatically.
+* `recipes/recipe.yml`: Main BlueBuild configuration recipe.
+* `files/scripts/`: Custom bash scripts executed during the image build phase.

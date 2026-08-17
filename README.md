@@ -1,4 +1,4 @@
-# My Custom Bazzite Image
+# My Custom Bazzite Image base on the latest bazzite-nvidia image
 
 A tailored, immutable Linux system based on [Bazzite](https://bazzite.gg/) and managed with [BlueBuild](https://blue-build.org/). 
 
@@ -11,7 +11,7 @@ This image extends the official Bazzite base image with personal system services
   * **CoolerControl:** Comprehensive fan control suite including the background service (`coolercontrold.service`).
   * **ckb-next:** Driver software for Corsair peripherals along with its daemon (`ckb-next-daemon.service`).
 * **System Cleanups:**
-  * Removal of Waydroid leftovers and unused desktop shortcuts.
+  * Removal of Waydroid
 * **Security:**
   * Automated digital container signing via **Cosign**.
 

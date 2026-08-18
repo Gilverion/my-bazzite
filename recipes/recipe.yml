@@ -15,12 +15,10 @@ modules:
   - type: dnf
     repos:
       copr:
-        - atim/starship
         - codifryed/CoolerControl
     install:
       packages:
         - micro
-        - starship
         - coolercontrol
         - ckb-next
         

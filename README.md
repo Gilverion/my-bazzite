@@ -19,15 +19,7 @@ This image extends the official Bazzite base image with personal system services
 
 ## 📦 Installation & Setup (Rebase)
 
-To switch your system to this custom image, execute the following steps in your terminal:
-
-### 1. Store the public Cosign key locally
-Enable your system to cryptographically verify your GitHub image signature:
-
-sudo mkdir -p /etc/pki/containers
-sudo cp cosign.pub /etc/pki/containers/my-bazzite.pub
-
-### 2. Rebase your system
+###  Rebase your system
 Rebase to the signed registry entry:
 
 rpm-ostree rebase ostree-image-signed:docker://ghcr.io/gilverion/my-bazzite:latest

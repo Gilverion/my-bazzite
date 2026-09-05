@@ -38,18 +38,7 @@ modules:
     scripts:
       - install-official-discord.sh
       - remove-waydroid-remnants.sh
-      
-  - type: fonts
-    fonts:
-      microsoft:
-        - Arial
-        - Times New Roman
-        - Calibri
-        - Comic Sans MS
-        - Courier New
-        - Georgia
-        - Impact
-        - Trebuchet MS
-        - Verdana    
+      - install-ms-fonts.sh
+
         
   - type: signing

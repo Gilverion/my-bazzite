@@ -1,29 +1,47 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "Installing Microsoft Core & ClearType Fonts..."
+echo "Installing Microsoft Core & ClearType Fonts (Calibri) via mscorefonts2 RPM..."
 
 TARGET_DIR="/usr/share/fonts/ms-fonts"
 mkdir -p "$TARGET_DIR"
 
-# Lade das gebündelte ZIP-Archiv von mscorefonts2 herunter
-echo "Downloading fonts zip..."
-curl -sSL "https://downloads.sourceforge.net/project/mscorefonts2/msttcore-fonts-2.6-1.noarch.tar.gz" -o /tmp/fonts.tar.gz || true
+WORK_DIR=$(mktemp -d)
+cd "$WORK_DIR"
 
-if [ -s /tmp/fonts.tar.gz ]; then
-  tar -xzf /tmp/fonts.tar.gz -C /tmp/
-  # Kopiere alle TTF-Schriftarten in das Zielverzeichnis
-  find /tmp/ -type f \( -name "*.ttf" -o -name "*.TTF" \) -exec cp {} "$TARGET_DIR/" \; 2>/dev/null || true
-  rm -rf /tmp/fonts.tar.gz
+# Herunterladen des mscorefonts2 RPMs
+RPM_URL="https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm"
+echo "Downloading RPM from SourceForge..."
+curl -sSL -L "$RPM_URL" -o msttcore.rpm
+
+# Prüfen ob eine gültige RPM-Datei heruntergeladen wurde
+if file msttcore.rpm | grep -qE 'RPM|data'; then
+  echo "Extracting RPM contents..."
+  rpm2cpio msttcore.rpm | cpio -idmv 2>/dev/null || true
+  
+  # Alle TTF/OTF Schriftarten in das Zielverzeichnis kopieren
+  echo "Copying TTF fonts to $TARGET_DIR..."
+  find . -type f \( -name "*.ttf" -o -name "*.TTF" -o -name "*.otf" -o -name "*.OTF" \) -exec cp {} "$TARGET_DIR/" \;
+else
+  echo "Warning: Downloaded file is not a valid RPM."
 fi
+
+# Aufräumen
+cd /
+rm -rf "$WORK_DIR"
 
 # Dateinamen vereinheitlichen (Kleinschreibung)
 cd "$TARGET_DIR"
 for f in *; do
-  [ -f "$f" ] && mv -f "$f" "${f,,}" 2>/dev/null || true
+  if [ -f "$f" ]; then
+    lower_f=$(echo "$f" | tr '[:upper:]' '[:lower:]')
+    if [ "$f" != "$lower_f" ]; then
+      mv -f "$f" "$lower_f" 2>/dev/null || true
+    fi
+  fi
 done
 
 chmod 644 "$TARGET_DIR"/* 2>/dev/null || true
 fc-cache -f "$TARGET_DIR"
 
-echo "Microsoft Fonts script completed!"
+echo "Microsoft Fonts script completed successfully!"

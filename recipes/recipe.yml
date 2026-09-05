@@ -16,12 +16,13 @@ modules:
     repos:
       copr:
         - codifryed/CoolerControl
+        - faugus/faugus-launcher
     install:
       packages:
         - micro
         - coolercontrol
         - ckb-next
-        
+        - faugus-launcher
   - type: systemd
     system:
       enabled:

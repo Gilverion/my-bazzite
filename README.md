@@ -15,7 +15,7 @@ This image extends the official Bazzite base image with personal system services
 * **ckb-next:** Driver software for Corsair peripherals along with its daemon (`ckb-next-daemon.service`).
 
 ### System Enhancements & Fonts
-* **Microsoft Core & ClearType Fonts:** Full system-wide integration of MS fonts (including Calibri, Cambria, Arial, etc.) for flawless document compatibility in ONLYOFFICE and LibreOffice.
+* **Microsoft Core & ClearType Fonts:** Full system-wide integration of MS fonts (including Calibri, Cambria, Arial, etc.) for flawless document compatibility in ONLYOFFICE or LibreOffice.
 
 ### System Cleanups
 * **Waydroid Removal:** Stripped out Waydroid remnants to keep the system footprint clean.

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "Installing Microsoft Fonts from private repository..."
+echo "Installing Microsoft Fonts from original repository..."
 
 TARGET_DIR="/usr/share/fonts/ms-fonts"
 mkdir -p "$TARGET_DIR"
@@ -9,15 +9,9 @@ mkdir -p "$TARGET_DIR"
 WORK_DIR=$(mktemp -d)
 cd "$WORK_DIR"
 
-# Sichere Abfrage der GITHUB_TOKEN Variable (verhindert 'unbound variable' Fehler)
-TOKEN="${GITHUB_TOKEN:-}"
-
-echo "Cloning private fonts repository..."
-if [ -n "$TOKEN" ]; then
-  git clone --depth 1 "https://x-access-token:${TOKEN}@github.com/Gilverion/my-ms-fonts.git" fonts-repo
-else
-  git clone --depth 1 "https://github.com/Gilverion/my-ms-fonts.git" fonts-repo
-fi
+# Öffentliches Repository klonen
+echo "Cloning original fonts repository..."
+git clone --depth 1 "https://github.com/streetsamurai00mi/ttf-ms-win10.git" fonts-repo
 
 echo "Copying fonts to $TARGET_DIR..."
 find fonts-repo -type f \( -name "*.ttf" -o -name "*.TTF" -o -name "*.ttc" -o -name "*.TTC" \) -exec cp {} "$TARGET_DIR/" \;

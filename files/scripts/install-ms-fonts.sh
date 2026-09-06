@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "Installing Microsoft Fonts from original repository..."
+echo "Installing Microsoft Fonts from fonts repository..."
 
 TARGET_DIR="/usr/share/fonts/ms-fonts"
 mkdir -p "$TARGET_DIR"
@@ -10,8 +10,8 @@ WORK_DIR=$(mktemp -d)
 cd "$WORK_DIR"
 
 # Öffentliches Repository klonen
-echo "Cloning original fonts repository..."
-git clone --depth 1 "https://github.com/streetsamurai00mi/ttf-ms-win10.git" fonts-repo
+echo "Cloning from the fonts repository..."
+git clone --depth 1 "https://github.com/Gilverion/ttf-ms-win10" fonts-repo
 
 echo "Copying fonts to $TARGET_DIR..."
 find fonts-repo -type f \( -name "*.ttf" -o -name "*.TTF" -o -name "*.ttc" -o -name "*.TTC" \) -exec cp {} "$TARGET_DIR/" \;

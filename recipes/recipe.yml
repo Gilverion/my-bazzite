@@ -19,7 +19,6 @@ modules:
         - faugus/faugus-launcher
     install:
       packages:
-        - micro
         - coolercontrol
         - ckb-next
         - faugus-launcher
@@ -27,17 +26,10 @@ modules:
     system:
       enabled:
         - coolercontrold.service
-        - ckb-next-daemon.service     
-        
-  - type: rpm-ostree
-    remove:
-      - waydroid
-      - waydroid-selinux
-      
+        - ckb-next-daemon.service           
   - type: script
     scripts:
       - install-official-discord.sh
-      - remove-waydroid-remnants.sh
       - install-ms-fonts.sh
 
         

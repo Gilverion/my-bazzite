@@ -17,9 +17,6 @@ This image extends the official Bazzite base image with personal system services
 ### System Enhancements & Fonts
 * **Microsoft Core & ClearType Fonts:** Full system-wide integration of MS fonts (including Calibri, Cambria, Arial, etc.) for flawless document compatibility in ONLYOFFICE or LibreOffice.
 
-### System Cleanups
-* **Waydroid Removal:** Stripped out Waydroid remnants to keep the system footprint clean.
-
 ### Security
 * **Cosign Signed:** Automated digital container signing via Cosign for safe image deployments.
 

@@ -3,7 +3,7 @@
 # image will be published to ghcr.io/<user>/<name>
 name: my-bazzite
 # description will be included in the image's metadata
-description: custom Bazzite image without Waydroid and preinstalled Discord
+description: custom Bazzite image with preinstalled Discord
 
 # the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/ublue-os/bazzite-nvidia

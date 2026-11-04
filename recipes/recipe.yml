@@ -29,7 +29,7 @@ modules:
         - coolercontrold.service
         - ckb-next-daemon.service           
   - type: script
-      scripts:
+    scripts:
     #   - install-official-discord.sh
        - install-ms-fonts.sh
 

@@ -22,15 +22,16 @@ modules:
         - coolercontrol
         - ckb-next
         - faugus-launcher
+        - "https://discord.com/api/download?platform=linux&format=rpm"
   - type: systemd
     system:
       enabled:
         - coolercontrold.service
         - ckb-next-daemon.service           
-  - type: script
-    scripts:
-      - install-official-discord.sh
-      - install-ms-fonts.sh
+#  - type: script
+ #   scripts:
+    #  - install-official-discord.sh
+   #   - install-ms-fonts.sh
 
         
   - type: signing

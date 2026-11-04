@@ -1,15 +1,20 @@
+
 #!/usr/bin/bash
-set -edxu
+set -eoux pipefail
 
-# 1. Offizielles Discord RPM direkt herunterladen
-curl -L -o /tmp/discord.rpm "https://discord.com/api/download?platform=linux&format=rpm"
+# Offizielles Discord RPM herunterladen
+curl -fL -o /tmp/discord.rpm \
+  "https://discord.com/api/download?platform=linux&format=rpm"
 
-# 2. RPM ins System integrieren
-rpm-ostree install /tmp/discord.rpm
-rm /tmp/discord.rpm
+# Discord im Build-Container installieren
+dnf install -y /tmp/discord.rpm
 
-# 3. Update-Sperre deaktivieren (damit Discord nicht den Start blockiert)
+# Temporäre Datei entfernen
+rm -f /tmp/discord.rpm
+
+# Update-Sperre deaktivieren
 mkdir -p /etc/skel/.config/discord
+
 cat << 'EOF' > /etc/skel/.config/discord/settings.json
 {
   "SKIP_HOST_UPDATE": true

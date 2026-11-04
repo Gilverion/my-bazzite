@@ -1,6 +1,6 @@
 
 #!/usr/bin/bash
-set -eoux pipefail
+set -euxo pipefail
 
 # Offizielles Discord RPM herunterladen
 curl -fL -o /tmp/discord.rpm \

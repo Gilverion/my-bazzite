@@ -28,10 +28,10 @@ modules:
       enabled:
         - coolercontrold.service
         - ckb-next-daemon.service           
-#  - type: script
- #   scripts:
-    #  - install-official-discord.sh
-   #   - install-ms-fonts.sh
+  - type: script
+      scripts:
+    #   - install-official-discord.sh
+       - install-ms-fonts.sh
 
         
   - type: signing
